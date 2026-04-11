@@ -1,4 +1,5 @@
-/* SECURETRIAGE SOC TERMINAL — Author: Gokul */
+/* SECURETRIAGE SOC TERMINAL 
+ Author: Gokul */
 
 :root {
   --bg:       #020408;
@@ -31,7 +32,6 @@ body {
   cursor: crosshair;
 }
 
-/* ── MATRIX CANVAS ── */
 #matrix-canvas {
   position: fixed;
   inset: 0;
@@ -40,7 +40,6 @@ body {
   pointer-events: none;
 }
 
-/* ── SCANLINES ── */
 .scanlines {
   position: fixed;
   inset: 0;
@@ -55,7 +54,6 @@ body {
   );
 }
 
-/* ── VIGNETTE ── */
 .vignette {
   position: fixed;
   inset: 0;
@@ -64,7 +62,6 @@ body {
   background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.7) 100%);
 }
 
-/* ── LOADER ── */
 #loader {
   position: fixed;
   inset: 0;
@@ -239,7 +236,6 @@ body {
   box-shadow: 0 0 8px white;
 }
 
-/* ── HEADER ── */
 header {
   position: sticky; top: 0; z-index: 100;
   display: flex; align-items: center;
@@ -316,7 +312,6 @@ header {
 
 .hdr-sep { width: 1px; height: 28px; background: var(--border2); }
 
-/* ── TICKER ── */
 .ticker-wrap {
   position: relative; z-index: 3;
   display: flex; align-items: center;
@@ -352,7 +347,6 @@ header {
 
 @keyframes ticker { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
-/* ── MAIN ── */
 main {
   position: relative; z-index: 3;
   padding: 20px 28px;
@@ -360,7 +354,6 @@ main {
   margin: 0 auto;
 }
 
-/* ── CONTROL PANEL ── */
 .ctrl-panel {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -400,7 +393,6 @@ main {
   flex-wrap: wrap;
 }
 
-/* ── CMD BUTTONS ── */
 .cmd-btn {
   position: relative;
   display: inline-flex;
@@ -498,7 +490,6 @@ main {
   transform: none !important;
 }
 
-/* ── UPLOAD ZONE ── */
 .upload-zone { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
 .sel {
@@ -554,7 +545,7 @@ main {
   font-size: 10px;
 }
 
-/* ── STATUS BAR ── */
+
 .status-bar {
   display: flex;
   align-items: center;
@@ -604,7 +595,6 @@ main {
 
 .hidden { display: none !important; }
 
-/* ── METRIC CARDS ── */
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -705,7 +695,6 @@ main {
   box-shadow: 0 0 6px var(--c, var(--green));
 }
 
-/* ── CHARTS GRID ── */
 .charts-grid {
   display: grid;
   grid-template-columns: 1fr 1.8fr;
@@ -755,7 +744,6 @@ main {
 
 .chart-inner { padding: 16px; max-height: 280px; }
 
-/* ── TABLES ── */
 .table-panel {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -858,7 +846,6 @@ tbody td {
   animation: blink 1s step-end infinite;
 }
 
-/* ── BADGES ── */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -885,7 +872,6 @@ tbody td {
 .raw-cell  { max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 10px; cursor: pointer; }
 .raw-cell:hover { color: var(--text); }
 
-/* ── FOOTER ── */
 footer {
   position: relative; z-index: 3;
   border-top: 1px solid var(--border);
@@ -903,7 +889,6 @@ footer {
 
 .ftr-sep { color: var(--border2); }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 1200px) {
   .metrics-grid  { grid-template-columns: repeat(3,1fr); }
   .charts-grid   { grid-template-columns: 1fr; }

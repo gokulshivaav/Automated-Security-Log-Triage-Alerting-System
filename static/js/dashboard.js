@@ -1,4 +1,5 @@
-/* SECURETRIAGE SOC TERMINAL — Author: Gokul */
+/* SECURETRIAGE SOC TERMINAL 
+Author: Gokul */
 
 let severityChart = null;
 let ipChart = null;
@@ -19,7 +20,6 @@ const BOOT_MESSAGES = [
   "[ OK ] All systems nominal. Dashboard ready.",
 ];
 
-// ── MATRIX RAIN ──
 function initMatrix() {
   const canvas = document.getElementById('matrix-canvas');
   const ctx = canvas.getContext('2d');
@@ -51,7 +51,6 @@ function initMatrix() {
   });
 }
 
-// ── BOOT SEQUENCE ──
 function runBootSequence() {
   const logEl  = document.getElementById('boot-log');
   const fillEl = document.getElementById('boot-fill');
@@ -85,7 +84,6 @@ function runBootSequence() {
   }, 120);
 }
 
-// ── RADAR ──
 function initRadar() {
   const canvas = document.getElementById('radar-canvas');
   const ctx    = canvas.getContext('2d');
@@ -94,7 +92,7 @@ function initRadar() {
   function drawRadar() {
     ctx.clearRect(0, 0, 40, 40);
 
-    // Circles
+
     ctx.strokeStyle = 'rgba(0,255,65,0.15)';
     ctx.lineWidth = 0.5;
     [6, 11, 16].forEach(radius => {
@@ -103,13 +101,12 @@ function initRadar() {
       ctx.stroke();
     });
 
-    // Cross
+
     ctx.beginPath();
     ctx.moveTo(cx - r, cy); ctx.lineTo(cx + r, cy);
     ctx.moveTo(cx, cy - r); ctx.lineTo(cx, cy + r);
     ctx.stroke();
 
-    // Sweep
     const grad = ctx.createConicalGradient
       ? ctx.createConicalGradient(cx, cy, radarAngle)
       : null;
@@ -135,7 +132,6 @@ function initRadar() {
   drawRadar();
 }
 
-// ── UPTIME ──
 function startUptime() {
   setInterval(() => {
     uptimeSeconds++;
@@ -146,7 +142,6 @@ function startUptime() {
   }, 1000);
 }
 
-// ── FOOTER CLOCK ──
 function startClock() {
   const el = document.getElementById('ftr-time');
   setInterval(() => {
@@ -154,7 +149,6 @@ function startClock() {
   }, 1000);
 }
 
-// ── ANIMATE CARDS IN ──
 function animateCards() {
   document.querySelectorAll('.metric-card').forEach((card, i) => {
     setTimeout(() => {
@@ -164,7 +158,6 @@ function animateCards() {
   });
 }
 
-// ── STATUS ──
 function showStatus(msg, isError = false) {
   const bar  = document.getElementById('status-bar');
   const msgEl = document.getElementById('status-message');
@@ -187,7 +180,6 @@ function updateTimestamp() {
     new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 }
 
-// ── ANIMATED COUNT ──
 function animateCount(el, target) {
   const start = parseInt(el.textContent) || 0;
   const diff  = target - start;
@@ -203,13 +195,11 @@ function animateCount(el, target) {
   requestAnimationFrame(step);
 }
 
-// ── TICKER UPDATE ──
 function updateTicker(msg) {
   const el = document.getElementById('ticker-content');
   el.textContent = msg + ' ◆ SYSTEM ACTIVE ◆ ' + new Date().toLocaleTimeString() + ' ◆ ';
 }
 
-// ── CARDS UPDATE ──
 function updateCards(counts, total) {
   animateCount(document.getElementById('total-count'),    total || 0);
   animateCount(document.getElementById('critical-count'), counts['CRITICAL'] || 0);
@@ -218,7 +208,7 @@ function updateCards(counts, total) {
   animateCount(document.getElementById('low-count'),      counts['LOW']      || 0);
 }
 
-// ── CHARTS ──
+
 const CHART_OPTS = {
   plugins: {
     tooltip: {
@@ -328,7 +318,6 @@ function updateIPChart(topIPs) {
   });
 }
 
-// ── SCORE COLOR ──
 function scoreColor(s) {
   if (s >= 80) return '#ff2a2a';
   if (s >= 60) return '#ff8c00';
@@ -336,7 +325,6 @@ function scoreColor(s) {
   return '#00ff41';
 }
 
-// ── RENDER ALERTS ──
 function renderAlerts(alerts) {
   const tbody = document.getElementById('alerts-body');
   tbody.innerHTML = '';
@@ -367,7 +355,6 @@ function renderAlerts(alerts) {
   });
 }
 
-// ── RENDER BLACKLIST ──
 function renderBlacklist(ips) {
   const tbody = document.getElementById('blacklist-body');
   tbody.innerHTML = '';
@@ -392,7 +379,6 @@ function renderBlacklist(ips) {
   });
 }
 
-// ── API ──
 async function fetchAlerts(severity = null) {
   try {
     let url = '/api/alerts';
@@ -428,7 +414,6 @@ async function refreshDashboard() {
   icon.style.animation = '';
 }
 
-// ── BUTTONS ──
 document.getElementById('btn-analyse').addEventListener('click', async () => {
   const btn = document.getElementById('btn-analyse');
   btn.disabled = true;
@@ -493,7 +478,6 @@ document.querySelectorAll('.flt').forEach(btn => {
   });
 });
 
-// ── KEYBOARD SHORTCUT ──
 document.addEventListener('keydown', e => {
   if (e.ctrlKey && e.key === 'r') {
     e.preventDefault();
@@ -501,7 +485,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
   initMatrix();
   initRadar();
