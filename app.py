@@ -2,7 +2,8 @@
 # Author: Yuva ( Copied for Integration )
 # Purpose: Main Flask web application 
 # Acts as the backend API server for the dashboard
-
+import os
+from notifier import check_and_notify
 from flask import Flask, jsonify, request, render_template
 from log_parser import parse_log_file
 from triage_engine import triage_all_events, get_summary
@@ -32,22 +33,12 @@ ALLOWED_EXTENSIONS = {"log", "txt"}
 
 
 def allowed_file(filename):
-    """
-    Checks if an uploaded file has an allowed extension.
-    Prevents users from uploading dangerous file types.
-    """
+  
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def process_and_store_logs(filepath, log_type):
-    """
-    Full pipeline for one log file:
-    1. Parse the file into events
-    2. Run triage on all events
-    3. Save each event to the database
-    4. Auto-blacklist any CRITICAL IPs
-    Returns the list of triaged events.
-    """
+    
     events = parse_log_file(filepath, log_type)
 
     if not events:
@@ -71,6 +62,8 @@ def process_and_store_logs(filepath, log_type):
                 event.get("source_ip", "unknown"),
                 f"Auto-blacklisted: {event.get('event_type')}"
             )
+
+    check_and_notify(triaged)
 
     return triaged
 
@@ -226,6 +219,6 @@ def clear():
 if __name__ == "__main__":
     create_tables()
     print("[APP] Security Log Triage System starting...")
-    print("[APP] Open your browser and go to: http://127.0.0.1:5000")
+    print("[APP] Open your browser and go to: http://127.0.0.1:5001")
 
-    app.run(debug=True)
+    app.run(debug=True, port=5001)

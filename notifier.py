@@ -1,5 +1,5 @@
 # notifier.py
-# Author: Yuva
+# Author: Yuva (Copied for integration)
 # Purpose: Sends email alerts when CRITICAL severity events are detected
 
 import smtplib
